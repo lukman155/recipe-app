@@ -29,6 +29,8 @@ gem 'jbuilder'
 
 gem 'rubocop', '>= 1.0', '< 2.0'
 
+gem 'devise'
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
 
@@ -46,7 +48,7 @@ gem 'bootsnap', require: false
 
 # Use Sass to process CSS
 # gem "sassc-rails"
-
+gem 'letter_opener', group: :development
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
