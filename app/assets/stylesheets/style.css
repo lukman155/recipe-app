@@ -25,3 +25,20 @@ tr:nth-child(even) {
   background-color: #2a2a2a;
   color: white;
 }
+
+/* ______________ Navbar ____________ */
+
+#new-one {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* ___________ Recipe Page______________ */
+
+#recipes_col {
+  display: flex;
+}
+
+.recipes_row {
+  width: 400px;
+}
