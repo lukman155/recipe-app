@@ -11,7 +11,7 @@
   </head>
 
   <body>
-  <%= button_to "Logout", destroy_user_session_path, method: :delete, id: "destroy-session" %>
+    <%= render 'layouts/navbar' %>
     <% flash.each do |name, msg| %>
       <%= content_tag :div, msg, class: "alert alert-#{name}" %>
     <% end %>
