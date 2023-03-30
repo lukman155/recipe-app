@@ -1,6 +1,20 @@
 <p style="color: green"><%= notice %></p>
 
-<%= render @recipe %>
+
+<%= link_to toggle_public_recipe_path(@recipe), method: :put do %>
+  <%= @recipe.public ? "Make private" : "Make public" %>
+<% end %>
+
+<% if @recipe.public? || @recipe.user == current_user %>
+  <h2><%= @recipe.name %></h2>
+  <p>Preparation Time: <%= @recipe.preparation_time %> minutes</p>
+  <p>Cooking Time: <%= @recipe.cooking_time %> minutes</p>
+  <p>Description: <%= @recipe.description %></p>
+  <h3>Foods:</h3>
+  <%= render 'foods/foodtable', foods: @recipe.foods %>
+<% else %>
+  <p>This recipe is private.</p>
+<% end %>
 
 <div>
   <%= link_to "Edit this recipe", edit_recipe_path(@recipe) %> |
@@ -8,3 +22,7 @@
 
   <%= button_to "Destroy this recipe", @recipe, method: :delete %>
 </div>
+
+<% if @recipe.user == current_user %>
+  <%= link_to "Add Food", new_recipe_food_path(@recipe), class: "btn btn-primary" %>
+<% end %>

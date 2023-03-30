@@ -6,8 +6,17 @@ class RecipesController < ApplicationController
     @recipes = Recipe.all
   end
 
+  def toggle_public
+    @recipe = Recipe.find(params[:id])
+    @recipe.update(public: !@recipe.public)
+    redirect_to @recipe
+  end
+
   # GET /recipes/1 or /recipes/1.json
-  def show; end
+  def show
+    @recipe = Recipe.find(params[:id])
+    @foods = @recipe.foods
+  end
 
   # GET /recipes/new
   def new
