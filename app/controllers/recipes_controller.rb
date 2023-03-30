@@ -1,9 +1,8 @@
 class RecipesController < ApplicationController
-  before_action :set_recipe, only: %i[show edit update destroy]
-
+  before_action :set_recipe, only: %i[show edit update destroy new_food]
   # GET /recipes or /recipes.json
   def index
-    @recipes = Recipe.all
+    @recipes = Recipe.all.where(user_id: current_user.id)
   end
 
   def toggle_public
@@ -12,15 +11,35 @@ class RecipesController < ApplicationController
     redirect_to @recipe
   end
 
+   def new_food
+    if current_user == @recipe.user
+      @food = Food.new
+    else
+      redirect_to @recipe, alert: 'You are not authorized to add food to this recipe.'
+    end
+  end
+
+  def public_recipes
+    @public_recipes = Recipe.where(public: true).where.not(user_id: current_user.id)
+    
+    @public_recipes_with_total_prices = @public_recipes.map do |recipe|
+      {
+        name: recipe.name,
+        total_price: recipe.foods.sum('foods.price * foods.quantity')
+      }
+    end
+  end
+
   # GET /recipes/1 or /recipes/1.json
   def show
     @recipe = Recipe.find(params[:id])
-    @foods = @recipe.foods
+    @foods = Food.all
+    # @foods = @recipe.foods
   end
 
   # GET /recipes/new
   def new
-    @recipe = Recipe.new
+    @recipe = current_user.recipes.build
   end
 
   # GET /recipes/1/edit
@@ -28,7 +47,7 @@ class RecipesController < ApplicationController
 
   # POST /recipes or /recipes.json
   def create
-    @recipe = Recipe.new(recipe_params)
+    @recipe = current_user.recipes.build(recipe_params)
 
     respond_to do |format|
       if @recipe.save

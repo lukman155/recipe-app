@@ -3,11 +3,13 @@ Rails.application.routes.draw do
   resources :recipe_foods
   resources :recipes do
     member do
-      put :toggle_public
+      post 'toggle_public'
+      get :new_food
     end
   end
   resources :foods
   resources :users
+  get '/public_recipes', to: 'recipes#public_recipes', as: 'public_recipes'
 
   root 'foods#index'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
