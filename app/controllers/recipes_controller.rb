@@ -11,7 +11,7 @@ class RecipesController < ApplicationController
     redirect_to @recipe
   end
 
-   def new_food
+  def new_food
     if current_user == @recipe.user
       @food = Food.new
     else
@@ -21,7 +21,7 @@ class RecipesController < ApplicationController
 
   def public_recipes
     @public_recipes = Recipe.where(public: true).where.not(user_id: current_user.id)
-    
+
     @public_recipes_with_total_prices = @public_recipes.map do |recipe|
       {
         name: recipe.name,
