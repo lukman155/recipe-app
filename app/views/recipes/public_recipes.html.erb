@@ -1,0 +1,23 @@
+<h1>Public Recipes</h1>
+<% if @public_recipes.any? %>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Total Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @public_recipes.each do |recipe| %>
+        <tr>
+          <td><%= recipe.name %></td>
+          <td><%= recipe.total_price %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <br>
+  <br>
+  <p>There are no recipes currently available, please add one.</p>
+<% end %>

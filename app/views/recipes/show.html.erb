@@ -1,10 +1,23 @@
 <p style="color: green"><%= notice %></p>
 
-<%= render @recipe %>
 
-<div>
-  <%= link_to "Edit this recipe", edit_recipe_path(@recipe) %> |
-  <%= link_to "Back to recipes", recipes_path %>
+<%= form_tag toggle_public_recipe_path(@recipe), method: :post do %>
+  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+  <%= submit_tag @recipe.public ? 'Make private' : 'Make public' %>
+<% end %>
 
-  <%= button_to "Destroy this recipe", @recipe, method: :delete %>
-</div>
+<% if @recipe.public? || @recipe.user == current_user %>
+  <h2><%= @recipe.name %></h2>
+  <p>Preparation Time: <%= @recipe.preparation_time %> minutes</p>
+  <p>Cooking Time: <%= @recipe.cooking_time %> minutes</p>
+  <p>Description: <%= @recipe.description %></p>
+  <h3>Foods:</h3>
+
+  <hr>
+  <%= link_to 'Add ingredient', new_food_recipe_path(@recipe), class:'btn btn-secondary' %>
+  <%= render 'recipefood', foods: @recipe.foods %>
+<% else %>
+  <p>This recipe is private.</p>
+<% end %>
+
+<%= link_to "Back to recipes", recipes_path %>
