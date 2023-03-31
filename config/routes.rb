@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users
-  resources :recipe_foods
+  resources :recipe_foods 
   resources :recipes do
     member do
       post 'toggle_public'
@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   end
   resources :foods
   resources :users
+  
   get '/public_recipes', to: 'recipes#public_recipes', as: 'public_recipes'
 
   root 'foods#index'

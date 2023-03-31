@@ -20,7 +20,7 @@ class RecipesController < ApplicationController
   end
 
   def public_recipes
-    @public_recipes = Recipe.where(public: true).where.not(user_id: current_user.id)
+    @public_recipes = Recipe.where(public: true)
 
     @public_recipes_with_total_prices = @public_recipes.map do |recipe|
       {
@@ -33,8 +33,8 @@ class RecipesController < ApplicationController
   # GET /recipes/1 or /recipes/1.json
   def show
     @recipe = Recipe.find(params[:id])
-    @foods = Food.all
-    # @foods = @recipe.foods
+    # @foods = Food.all
+    @foods = @recipe.foods
   end
 
   # GET /recipes/new
