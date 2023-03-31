@@ -14,15 +14,20 @@ class RecipeFoodsController < ApplicationController
     @recipe_food = RecipeFood.new
     @recipes = Recipe.all
     @foods = Food.all
-  end  
+  end
 
   # GET /recipe_foods/1/edit
   def edit; end
 
+  def general_shopping_lists
+    @recipe_foods = RecipeFood.includes(:food)
+    @food_count = RecipeFood.select(:food_id).distinct.count
+  end
+
   # POST /recipe_foods or /recipe_foods.json
   def create
-    @recipe_food = RecipeFood.new(recipe_food_params.merge(recipe_id: params[:recipe_id]))
-  
+    @recipe_food = RecipeFood.new(recipe_food_params.merge(user_id: current_user.id))
+
     respond_to do |format|
       if @recipe_food.save
         format.html { redirect_to recipes_path, notice: 'Recipe food was successfully created.' }
@@ -37,7 +42,7 @@ class RecipeFoodsController < ApplicationController
   # PATCH/PUT /recipe_foods/1 or /recipe_foods/1.json
   def update
     respond_to do |format|
-      if @recipe_food.update(recipe_food_params)
+      if @recipe_food.update(recipe_food_params.merge(user_id: current_user.id, recipe_id: params[:recipe_id]))
         format.html { redirect_to recipe_food_url(@recipe_food), notice: 'Recipe food was successfully updated.' }
         format.json { render :show, status: :ok, location: @recipe_food }
       else
@@ -66,6 +71,6 @@ class RecipeFoodsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def recipe_food_params
-    params.require(:recipe_food).permit(:quantity, :recipe_id, :user_id)
+    params.require(:recipe_food).permit(:quantity, :food_id, :recipe_id)
   end
 end
