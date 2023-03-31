@@ -14,17 +14,13 @@
   </head>
 
   <body>
-    <% if user_signed_in? %>
-      <%= render 'layouts/navbar' %>
-    <% end %>
-    <div class='container'>
+    <%= render 'layouts/navbar' %>
+    <div class="d-flex justify-content-center">
     <br>
     <br>
     <% flash.each do |name, msg| %>
       <%= content_tag :div, msg, class: "alert alert-#{name}" %>
     <% end %>
-
-    
       <%= yield %>
     </div>
 

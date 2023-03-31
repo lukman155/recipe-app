@@ -1,4 +1,5 @@
-<%= link_to "New food", new_food_path, class:'btn btn-secondary' %>
+<div class="d-flex justify-content-center">
+<div>  <%= link_to "New food", new_food_path, class:'btn btn-secondary' %>
 <br/>
 <br/>
 <% if @foods.any? %>
@@ -6,3 +7,5 @@
 <% else %>
   <p>No foods to display. Please add food</p>
 <% end %>
+</div>
+</div>
