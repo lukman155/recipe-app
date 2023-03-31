@@ -21,15 +21,10 @@ class RecipesController < ApplicationController
   end
 
   def public_recipes
-    @public_recipes = Recipe.where(public: true).where.not(user_id: current_user.id)
-
-    @public_recipes_with_total_prices = @public_recipes.map do |recipe|
-      {
-        name: recipe.name,
-        total_price: recipe.foods.sum('foods.price * foods.quantity')
-      }
-    end
+    @recipes = Recipe.includes(:user).where(public: true).order(created_at: :desc)
+    @recipe_food = RecipeFood.all
   end
+  
 
   # GET /recipes/1 or /recipes/1.json
   def show
