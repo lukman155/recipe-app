@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   resources :foods
   resources :users
   get '/public_recipes', to: 'recipes#public_recipes', as: 'public_recipes'
-  get 'general_shopping_lists', to: 'general_shopping_lists#show'
+  get '/general_shopping_lists', to: 'recipe_foods#general_shopping_lists', as: 'general_shopping_lists'
 
   root 'foods#index'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
