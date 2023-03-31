@@ -1,13 +1,13 @@
 <div>
-<%= link_to "New recipe", new_recipe_path, class: "btn btn-success" %>
-<br> <br>
+  <div class="d-flex justify-content-between p-3 mb-3 w-50 mx-auto"><%= link_to "New recipe", new_recipe_path, class: "btn btn-success" %></div>
+  <br> <br>
 
   <div id="recipes">
     <% @recipes.each do |recipe| %>
-    <div class="d-flex justify-content-between border p-3 mb-3 w-50">
-    <div class="w-35">
-      <p><%= link_to recipe.name, recipe_path(recipe) %></p>
-      <div class="d-flex">
+    <div class="d-flex justify-content-between rounded-3 border p-3 mb-3 w-50 mx-auto">
+      <div class="w-35">
+        <p><%= link_to recipe.name, recipe_path(recipe) %></p>
+        <div class="d-flex">
         <%= link_to "View", recipe_path(recipe), class: "btn btn-primary me-2" %>
         <%= link_to "Remove", recipe, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
       </div>
@@ -15,7 +15,7 @@
     <div>
       <p><%= recipe.description %></p>
     </div>
-</div>
+    </div>
       <% end %>
   </div>
 </div>
