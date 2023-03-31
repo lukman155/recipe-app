@@ -24,7 +24,6 @@ class RecipesController < ApplicationController
     @recipes = Recipe.includes(:user).where(public: true).order(created_at: :desc)
     @recipe_food = RecipeFood.all
   end
-  
 
   # GET /recipes/1 or /recipes/1.json
   def show
