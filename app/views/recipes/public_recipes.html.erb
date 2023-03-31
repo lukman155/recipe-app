@@ -1,25 +1,22 @@
 <div>
-<h1>Public Recipes</h1>
-<% if @public_recipes.any? %>
-  <table>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Total Price</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @public_recipes.each do |recipe| %>
-        <tr>
-          <td><%= recipe.name %></td>
-          <td><%= recipe.total_price %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-<% else %>
-  <br>
-  <br>
-  <p>There are no recipes currently available, please add one.</p>
-<% end %>
+<h1 class="food_title">Public Recipes</h1> </br>
+
+<% @recipes.each do |recipe| %>
+  <%= link_to recipe_path(recipe.id), class:"public_recipes" do %> 
+   <div class="row border p-3 mb-3">
+  <div class="col-md-6">
+    <ul class="list-unstyled mb-0">
+      <li><h4><%= recipe.name %></h4></li>
+      <li>by <%= recipe.user.email %></li>
+    </ul>
+  </div>
+  <div class="col-md-6">
+    <ul class="list-unstyled mb-0">
+      <li>Total food items: <%= recipe.recipe_foods.count %></li>
+      <li>Total price: $<%= recipe.total_cost %></li>
+    </ul>
+  </div>
+</div>
+  <% end %>
+  <% end %>
 </div>
