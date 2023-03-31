@@ -1,23 +1,30 @@
-<p style="color: green"><%= notice %></p>
+<h2 class="food_title">Recipe </h2>
+<%= render @recipe %>
 
+<div class= "recipe-link">
+<%= link_to "Generate shopping list", general_shopping_lists_path%>
+  <%= link_to "Add new ingredient", new_recipe_food_path%>
+</div>
 
-<%= form_tag toggle_public_recipe_path(@recipe), method: :post do %>
-  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-  <%= submit_tag @recipe.public ? 'Make private' : 'Make public' %>
-<% end %>
+<table id="foods">
+  <tr class= "table-heading">
+    <th>Food</th>
+    <th>Quantity</th>
+    <th>Value</th>
+    <th>Actions</th>
+  </tr>
+  <% @recipe.recipe_foods.each do |item|%>
+    <tr id="<%= dom_id item %>">
+      <td class="table_data"><%= item.food.name %></td>
+      <td class="table_data"><%= item.quantity%><%= item.food.measurement_unit%></td>
+      <td class="table_data">$<%= item.quantity * item.food.price%></td>
+      <td class="table_data modify"><%= button_to "Delete", item, method: :delete, class: "btn_delete" %><%= link_to "Modify", edit_recipe_food_path, class: "btn_delete" %></td>
+    </tr>
+  <%end%>
+</table>
 
-<% if @recipe.public? || @recipe.user == current_user %>
-  <h2><%= @recipe.name %></h2>
-  <p>Preparation Time: <%= @recipe.preparation_time %> minutes</p>
-  <p>Cooking Time: <%= @recipe.cooking_time %> minutes</p>
-  <p>Description: <%= @recipe.description %></p>
-  <h3>Foods:</h3>
-
-  <hr>
-  <%= link_to 'Add ingredient', new_food_recipe_path(@recipe), class:'btn btn-secondary' %>
-  <%= render 'recipefood', foods: @recipe.foods %>
-<% else %>
-  <p>This recipe is private.</p>
-<% end %>
-
-<%= link_to "Back to recipes", recipes_path %>
+<div class= "links">
+  <%= link_to "Edit", edit_recipe_path(@recipe), class: "delete" %> 
+  <%= button_to "Delete", @recipe, method: :delete, class: "delete" %>
+  <%= link_to "Go Back", recipes_path, class: "delete" %>
+</div>
