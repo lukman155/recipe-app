@@ -2,9 +2,9 @@ Rails.application.routes.draw do
   devise_for :users
   resources :recipe_foods 
   resources :recipes do
+    resources :recipe_foods, only: [:new, :create]
     member do
       post 'toggle_public'
-      get :new_food
     end
   end
   resources :foods
