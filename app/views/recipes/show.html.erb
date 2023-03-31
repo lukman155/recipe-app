@@ -1,3 +1,5 @@
+<div>
+
 <h2 class="food_title">Recipe </h2>
 <%= render @recipe %>
 
@@ -27,4 +29,5 @@
   <%= link_to "Edit", edit_recipe_path(@recipe), class: "delete" %> 
   <%= button_to "Delete", @recipe, method: :delete, class: "delete" %>
   <%= link_to "Go Back", recipes_path, class: "delete" %>
+</div>
 </div>
