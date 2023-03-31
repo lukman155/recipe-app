@@ -24,8 +24,7 @@ class RecipeFoodsController < ApplicationController
 
   # POST /recipe_foods or /recipe_foods.json
   def create
-    @recipe_food = RecipeFood.new(recipe_food_params)
-
+    @recipe_food = RecipeFood.new(recipe_food_params.merge(user_id: current_user.id))
     if @recipe_food.save
       flash[:success] = 'Food added to recipe successfully'
       redirect_to @recipe
@@ -68,6 +67,6 @@ class RecipeFoodsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def recipe_food_params
-    params.require(:recipe_food).permit(:food_id, :quantity, :name, :value, :recipe_id)
+    params.require(:recipe_food).permit(:quantity, :name, :value, :recipe_id)
   end
 end

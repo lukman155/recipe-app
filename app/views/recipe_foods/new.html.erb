@@ -1,6 +1,6 @@
 <%= form_with model: @recipe_food, url: recipe_recipe_foods_path(recipe_id: @recipe.id), class: "new-recipe" do |f| %>
   <div class="field">
-    <%= f.label :name %>
+        <%= f.label :name %>
     <%= f.text_field :name %>
   </div>
   <div class="field">
