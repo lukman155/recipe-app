@@ -10,12 +10,14 @@
       <li>by <%= recipe.user.email %></li>
     </ul>
   </div>
+  <% if can? :manage, recipe %>
   <div class="col-md-6">
     <ul class="list-unstyled mb-0">
       <li>Total food items: <%= recipe.recipe_foods.count %></li>
       <li>Total price: $<%= recipe.total_cost %></li>
     </ul>
   </div>
+<% end %>
 </div>
   <% end %>
   <% end %>

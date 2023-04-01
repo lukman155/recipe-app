@@ -9,7 +9,9 @@
         <p><%= link_to recipe.name, recipe_path(recipe) %></p>
         <div class="d-flex">
         <%= link_to "View", recipe_path(recipe), class: "btn btn-primary me-2" %>
-        <%= link_to "Remove", recipe, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
+        <% if can? :destroy, recipe %>
+          <%= link_to "Remove", recipe, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
+        <% end %>
       </div>
     </div>
     <div>
