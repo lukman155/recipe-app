@@ -5,7 +5,7 @@
       <div class="col-md">
         
         <div class="d-flex justify-content-between mt-4">
-          <h2 class="food_title mb-4">Recipe</h2>
+          <h2 class="food_title mb-4">Recipe <%= @recipe.id %></h2>
          <%= form_for @recipe, id: "recipe_form" do |f| %>
   <div class="form-check form-switch mb-4">
     <% if @recipe.public %>

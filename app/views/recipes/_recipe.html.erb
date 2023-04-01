@@ -6,12 +6,12 @@
 
   <p>
     <strong>Preparation time:</strong>
-    <%= recipe.preparation_time %>
+    <%= recipe.preparation_time %> <%= recipe.preparation_time > 1? 'hours' : 'hour' %>
   </p>
 
   <p>
     <strong>Cooking time:</strong>
-    <%= recipe.cooking_time %>
+    <%= recipe.cooking_time %> <%= recipe.cooking_time > 1? 'hours' : 'hour' %>
   </p>
 
   <p>
