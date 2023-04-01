@@ -26,14 +26,25 @@ class RecipeFoodsController < ApplicationController
 
   # POST /recipe_foods or /recipe_foods.json
   def create
-    @recipe_food = RecipeFood.new(recipe_food_params.merge(user_id: current_user.id))
+    @recipe_food = RecipeFood.new(recipe_food_params)
 
+    # Check for duplicates
+    existing_record = RecipeFood.find_by(recipe_id: @recipe_food.recipe_id, food_id: @recipe_food.food_id)
+    if existing_record.present?
+      respond_to do |format|
+        format.html { redirect_to existing_record, notice: 'Recipe food already exists.' }
+        format.json { render json: { error: 'Recipe food already exists.' }, status: :unprocessable_entity }
+      end
+      return
+    end
+
+    # Create new record if no duplicates found
     respond_to do |format|
       if @recipe_food.save
-        format.html { redirect_to recipes_path, notice: 'Recipe food was successfully created.' }
+        format.html { redirect_to @recipe_food, notice: 'Recipe food was successfully created.' }
         format.json { render :show, status: :created, location: @recipe_food }
       else
-        format.html { render :new, status: :unprocessable_entity }
+        format.html { render :new }
         format.json { render json: @recipe_food.errors, status: :unprocessable_entity }
       end
     end
