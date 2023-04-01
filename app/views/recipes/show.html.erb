@@ -1,0 +1,75 @@
+<%= javascript_include_tag 'recipe' %>
+<div>
+  <div class="container-fluid">
+    <div class="row justify-content-center">
+      <div class="col-md">
+        
+        <div class="d-flex justify-content-between mt-4">
+          <h2 class="food_title mb-4">Recipe <%= @recipe.id %></h2>
+         <%= form_for @recipe, id: "recipe_form" do |f| %>
+  <div class="form-check form-switch mb-4">
+    <% if @recipe.public %>
+      <%= f.label :public, class: "form-check-label mr-3" do %>
+        <%= f.check_box :public, class: "form-check-input", id: "recipe_public", data: { recipe_id: @recipe.id } %>
+        Public Recipe
+      <% end %>
+    <% else %>
+      <%= f.label :public, class: "form-check-label mr-3" do %>
+        <%= f.check_box :public, class: "form-check-input", id: "recipe_public", data: { recipe_id: @recipe.id } %>
+        Not Public
+      <% end %>
+    <% end %>
+  </div>
+<% end %>
+
+        </div>
+
+        <div class="mb-4">
+          <%= render @recipe %>
+        </div>
+
+        <div class="recipe-link mb-4 d-flex"></div>
+          <% if can? :generate_shopping_list, @recipe %>
+            <%= link_to "Generate shopping list", general_shopping_lists_path, class: "btn btn-primary me-2" %>
+
+
+          <%= link_to "Add new ingredient", new_recipe_food_path(recipe_id: @recipe.id), class: "btn btn-success" %>
+        </div>
+
+        <table id="foods" class="table table-striped table-hover">
+          <thead>
+            <tr class="table-heading">
+              <th>Food</th>
+              <th>Quantity</th>
+              <th>Value</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @recipe.recipe_foods.each do |item| %>
+              <tr id="<%= dom_id item %>">
+                <td class="table_data"><%= item.food.name %></td>
+                <td class="table_data"><%= item.quantity %><%= item.food.measurement_unit %></td>
+                <td class="table_data">$<%= item.quantity * item.food.price %></td>
+                <td class="table_data modify d-flex gap-3">
+                  <%= button_to "Delete", item, method: :delete, class: "btn btn-danger btn-sm mr-2" %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+<% end %>
+        <div class="d-flex mt-4 gap-3">
+        <% if can? :manage, @recipe %>
+          <%= link_to "Edit", edit_recipe_path(@recipe), class: "btn btn-secondary mr-2" %>
+        <% end %>
+
+        <% if can? :manage, @recipe %>
+          <%= button_to "Delete", @recipe, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger mr-2" %>
+        <% end %>
+          <%= link_to "Go Back", recipes_path, class: "btn btn-primary" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

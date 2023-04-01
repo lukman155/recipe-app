@@ -1,0 +1,40 @@
+<%= form_with(model: recipe_food, class: "form-horizontal") do |form| %>
+  <% if recipe_food.errors.any? %>
+    <div class="alert alert-danger">
+      <h2><%= pluralize(recipe_food.errors.count, "error") %> prohibited this recipe_food from being saved:</h2>
+
+      <ul>
+        <% recipe_food.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= form.label :recipe_id, class: "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= form.select :recipe_id, @recipes.map { |recipe| [recipe.name, recipe.id] }, {}, class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :food_id, class: "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= form.select :food_id, @foods.map { |food| [food.name, food.id] }, {}, class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :quantity, class: "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= form.number_field :quantity, required: true, class:"form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group mt-2">
+    <div class="col-sm-offset-2 col-sm-10">
+      <%= form.submit class: "btn btn-primary" %>
+    </div>
+  </div>
+<% end %>

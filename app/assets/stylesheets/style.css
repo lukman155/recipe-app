@@ -1,0 +1,44 @@
+tr:nth-child(even) {
+  background-color: #d6eeee;
+}
+
+#customers {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#food td,
+#food th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#food tr:nth-child(even) { background-color: #f2f2f2; }
+
+#food tr:hover { background-color: #ddd; }
+
+#food th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #2a2a2a;
+  color: white;
+}
+
+/* ______________ Navbar ____________ */
+
+#new-one {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* ___________ Recipe Page______________ */
+
+#recipes_col {
+  display: flex;
+}
+
+.recipes_row {
+  width: 400px;
+}

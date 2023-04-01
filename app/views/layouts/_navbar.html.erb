@@ -1,0 +1,38 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <%= link_to "RecipeApp", root_path, class: "navbar-brand" %>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <%= link_to "Foods", foods_path, class: "nav-link" %>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Recipes
+          </a>
+          <ul class="dropdown-menu">
+            <li><%= link_to "Recipes", recipes_path, class: "dropdown-item" %></li>
+            <li><%= link_to "Public Recipes", public_recipes_path, class: "dropdown-item" %></li>
+          </ul>
+        </li>
+
+        <li class="nav-item">
+          <%= link_to "Shopping Cart", general_shopping_lists_path, class: "nav-link" %>
+        </li>
+
+      </ul>
+      <div>
+      <% if user_signed_in? %>
+        <%= button_to "Logout", destroy_user_session_path, method: :delete, class: "btn btn-outline-secondary", id: "destroy-session" %>
+        <% else %>
+        <%= link_to "Login", new_user_session_path, class: "btn btn-outline-secondary" %>
+        <%= link_to "Register", new_user_registration_path, class: "btn btn-outline-secondary" %>
+      <% end %>
+    </div>
+    </div>
+  </div>
+</nav>
