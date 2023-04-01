@@ -28,9 +28,12 @@
           <%= render @recipe %>
         </div>
 
-        <div class="recipe-link mb-4 d-flex">
-          <%= link_to "Generate shopping list", general_shopping_lists_path, class: "btn btn-primary me-2" %>
-<%= link_to "Add new ingredient", new_recipe_food_path(recipe_id: @recipe.id), class: "btn btn-success" %>
+        <div class="recipe-link mb-4 d-flex"></div>
+          <% if can? :generate_shopping_list, @recipe %>
+            <%= link_to "Generate shopping list", general_shopping_lists_path, class: "btn btn-primary me-2" %>
+
+
+          <%= link_to "Add new ingredient", new_recipe_food_path(recipe_id: @recipe.id), class: "btn btn-success" %>
         </div>
 
         <table id="foods" class="table table-striped table-hover">
@@ -55,10 +58,15 @@
             <% end %>
           </tbody>
         </table>
-
+<% end %>
         <div class="d-flex mt-4 gap-3">
+        <% if can? :manage, @recipe %>
           <%= link_to "Edit", edit_recipe_path(@recipe), class: "btn btn-secondary mr-2" %>
+        <% end %>
+
+        <% if can? :manage, @recipe %>
           <%= button_to "Delete", @recipe, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger mr-2" %>
+        <% end %>
           <%= link_to "Go Back", recipes_path, class: "btn btn-primary" %>
         </div>
       </div>
