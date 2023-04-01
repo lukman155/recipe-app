@@ -2,7 +2,9 @@
 import "@hotwired/turbo-rails"
 import "controllers"
 
-import '../../../node_modules/bootstrap/dist/js/bootstrap.js';
+import 'bootstrap';
 import '../../../node_modules/bootstrap/dist/css/bootstrap.css';
 import $ from 'jquery';
 global.$ = jQuery = $;
+
+//= require recipe

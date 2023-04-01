@@ -1,5 +1,5 @@
 class RecipesController < ApplicationController
-  before_action :set_recipe, only: %i[show edit update destroy new_food]
+  before_action :set_recipe, only: %i[show edit update destroy new_food toggle_public]
 
   # GET /recipes or /recipes.json
   def index
@@ -7,7 +7,6 @@ class RecipesController < ApplicationController
   end
 
   def toggle_public
-    @recipe = Recipe.find(params[:id])
     @recipe.update(public: !@recipe.public)
     redirect_to @recipe
   end
