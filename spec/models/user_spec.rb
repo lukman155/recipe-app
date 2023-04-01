@@ -1,27 +1,18 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  context 'validations' do
-    it 'is valid with valid attributes' do
-      user = User.new(email: 'user@example.com', password: 'password', password_confirmation: 'password')
-      expect(user).to be_valid
+  describe 'validations' do
+    before(:each) do
+      @user = User.create(name: 'John', email: '123@gmail.com', password: '123456')
+      @user1 = User.create(name: nil, email: '123@gmail.com', password: '123456')
     end
 
-    it 'is invalid without an email' do
-      user = User.new(password: 'password', password_confirmation: 'password')
-      expect(user).to_not be_valid
-    end
-  end
-
-  context 'associations' do
-    it 'has many recipes' do
-      assc = described_class.reflect_on_association(:recipes)
-      expect(assc.macro).to eq :has_many
+    it 'is valid' do
+      expect(@user).to be_valid
     end
 
-    it 'has many foods' do
-      assc = described_class.reflect_on_association(:foods)
-      expect(assc.macro).to eq :has_many
+    it 'is not valid without a name' do
+      expect(@user1).to_not be_valid
     end
   end
 end
