@@ -1,5 +1,6 @@
 class RecipesController < ApplicationController
   before_action :set_recipe, only: %i[show edit update destroy new_food toggle_public]
+  load_and_authorize_resource
 
   # GET /recipes or /recipes.json
   def index
