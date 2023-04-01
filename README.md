@@ -83,11 +83,10 @@ In the project directory, you can run:
 
 ## Authors
 
-👤 **Amine**
+👤 **Seko Dameh**
 
-- GitHub: [@ouasamine](https://github.com/ouasamine)
-- Twitter: [@ouass_amine](https://twitter.com/ouass_amine)
-- LinkedIn: [LinkedIn](https://www.linkedin.com/in/amine-ouassef)
+- GitHub: [@SekoViper](https://github.com/SekoViper)
+- LinkedIn: [Livingstone dameh](https://www.linkedin.com/in/livingstone-dameh/)
 
 👤 **Lukman Abdulkarim**
 
