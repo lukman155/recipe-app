@@ -2,7 +2,6 @@ require 'rails_helper'
 
 RSpec.describe Recipe, type: :model do
   context 'validations' do
-
     it 'is not valid without a name' do
       recipe = Recipe.new(preparation_time: 10, cooking_time: 20, description: 'A test recipe description')
       expect(recipe).to_not be_valid
@@ -44,7 +43,8 @@ RSpec.describe Recipe, type: :model do
   context 'methods' do
     describe '#total_cost' do
       it 'returns 0 when there are no recipe foods' do
-        recipe = Recipe.new(name: 'Test Recipe', preparation_time: 10, cooking_time: 20, description: 'A test recipe description')
+        recipe = Recipe.new(name: 'Test Recipe', preparation_time: 10, cooking_time: 20,
+                            description: 'A test recipe description')
         expect(recipe.total_cost).to eq 0
       end
     end

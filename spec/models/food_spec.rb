@@ -2,7 +2,6 @@ require 'rails_helper'
 
 RSpec.describe Food, type: :model do
   context 'validations' do
-
     it 'is not valid without a name' do
       food = Food.new(name: nil, measurement_unit: 'kg', quantity: 1, price: 0.5)
       expect(food).to_not be_valid

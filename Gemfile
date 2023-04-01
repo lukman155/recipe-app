@@ -73,10 +73,10 @@ end
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem 'capybara'
-  gem 'selenium-webdriver'
-  gem 'webdrivers'
-  gem 'rspec-rails'
-  gem 'shoulda-matchers'
-  gem 'faker'
   gem 'factory_bot_rails'
+  gem 'faker'
+  gem 'rspec-rails'
+  gem 'selenium-webdriver'
+  gem 'shoulda-matchers'
+  gem 'webdrivers'
 end
