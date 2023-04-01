@@ -27,7 +27,7 @@ class RecipeFoodsController < ApplicationController
 
   # POST /recipe_foods or /recipe_foods.json
   def create
-    @recipe_food = RecipeFood.new(recipe_food_params)
+    @recipe_food = RecipeFood.new(recipe_food_params.merge(user_id: current_user.id))
 
     # Check for duplicates
     existing_record = RecipeFood.find_by(recipe_id: @recipe_food.recipe_id, food_id: @recipe_food.food_id)
@@ -83,6 +83,6 @@ class RecipeFoodsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def recipe_food_params
-    params.require(:recipe_food).permit(:quantity, :food_id, :recipe_id)
+    params.require(:recipe_food).permit(:quantity, :food_id, :recipe_id, :user_id)
   end
 end
