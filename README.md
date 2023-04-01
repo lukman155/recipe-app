@@ -119,4 +119,4 @@ If you like this project, please give it a star!
 
 ## License 
 
-This project is [MIT](./LICENSE) licensed.
+This project is [MIT](./MIT.md) licensed.
